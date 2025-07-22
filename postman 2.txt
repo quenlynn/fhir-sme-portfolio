@@ -1,0 +1,115 @@
+{
+  "info": {
+    "name": "FHIR Sample Collection",
+    "_postman_id": "abcd1234-5678-90ef-ghij-klmnopqrstuv",
+    "description": "Postman collection for creating and retrieving FHIR Patient, Observation, and ServiceRequest resources on a HAPI FHIR Server.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Patient",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/fhir+json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"resourceType\": \"Patient\",\n  \"id\": \"789012\",\n  \"name\": [{\"use\": \"official\", \"family\": \"Doe\", \"given\": [\"John\"]}],\n  \"gender\": \"male\",\n  \"birthDate\": \"1985-05-20\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8081/fhir/Patient",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8081",
+          "path": ["fhir", "Patient"]
+        }
+      }
+    },
+    {
+      "name": "Create Observation",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/fhir+json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"resourceType\": \"Observation\",\n  \"status\": \"final\",\n  \"code\": {\n    \"coding\": [{\n      \"system\": \"http://loinc.org\",\n      \"code\": \"8480-6\",\n      \"display\": \"Systolic Blood Pressure\"\n    }]\n  },\n  \"subject\": {\n    \"reference\": \"Patient/3\"\n  },\n  \"valueQuantity\": {\n    \"value\": 135,\n    \"unit\": \"mmHg\",\n    \"system\": \"http://unitsofmeasure.org\",\n    \"code\": \"mm[Hg]\"\n  },\n  \"effectiveDateTime\": \"2025-07-22T10:00:00Z\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8081/fhir/Observation",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8081",
+          "path": ["fhir", "Observation"]
+        }
+      }
+    },
+    {
+      "name": "Create ServiceRequest",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/fhir+json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"resourceType\": \"ServiceRequest\",\n  \"status\": \"active\",\n  \"intent\": \"order\",\n  \"code\": {\n    \"coding\": [{\n      \"system\": \"http://snomed.info/sct\",\n      \"code\": \"104963000\",\n      \"display\": \"X-ray of chest\"\n    }]\n  },\n  \"subject\": {\n    \"reference\": \"Patient/3\"\n  },\n  \"authoredOn\": \"2025-07-22\",\n  \"requester\": {\n    \"reference\": \"Practitioner/example\"\n  }\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8081/fhir/ServiceRequest",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8081",
+          "path": ["fhir", "ServiceRequest"]
+        }
+      }
+    },
+    {
+      "name": "GET Patient by ID",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8081/fhir/Patient/3",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8081",
+          "path": ["fhir", "Patient", "3"]
+        }
+      }
+    },
+    {
+      "name": "GET Observation by Patient",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8081/fhir/Observation?subject=Patient/3",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8081",
+          "path": ["fhir", "Observation"],
+          "query": [
+            { "key": "subject", "value": "Patient/3" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "GET ServiceRequest by Patient",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:8081/fhir/ServiceRequest?subject=Patient/3",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8081",
+          "path": ["fhir", "ServiceRequest"],
+          "query": [
+            { "key": "subject", "value": "Patient/3" }
+          ]
+        }
+      }
+    }
+  ]
+}

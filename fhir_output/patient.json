@@ -1,0 +1,41 @@
+{
+  "resourceType": "Patient",
+  "id": "123456",
+  "identifier": [
+    {
+      "use": "usual",
+      "type": {
+        "text": "Medical Record Number"
+      },
+      "value": "123456",
+      "system": "http://hospital.smarthealth.org/mrn"
+    }
+  ],
+  "name": [
+    {
+      "family": "Smith",
+      "given": [
+        "John"
+      ]
+    }
+  ],
+  "gender": "male",
+  "birthDate": "1980-01-01",
+  "address": [
+    {
+      "line": [
+        "123 Main St"
+      ],
+      "city": "Metropolis",
+      "state": "NY",
+      "postalCode": "10451"
+    }
+  ],
+  "telecom": [
+    {
+      "system": "phone",
+      "value": "555-555-1212",
+      "use": "home"
+    }
+  ]
+}

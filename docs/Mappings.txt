@@ -1,0 +1,17 @@
+From OBX, we’ll map:
+
+HL7 Field	Meaning	                           FHIR Observation Element
+OBX-3	    LOINC Code (e.g. 789-8)	           code.coding.code
+OBX-5	    Value (e.g. 13.5)	                   valueQuantity.value
+OBX-6	    Units (e.g. g/dL)	                   valueQuantity.unit
+OBX-7	    Reference Range (12-16)	           referenceRange.text
+
+
+
+
+Data Mapping — HL7 → FHIR ServiceRequest
+HL7 Field		Meaning				FHIR ServiceRequest Element
+OBR-4		LOINC code				code.coding.code
+OBR-7		Requested date/time			authoredOn
+OBR-16		Ordering provider			requester.agent.reference
+PID-3		Patient ID				subject.reference

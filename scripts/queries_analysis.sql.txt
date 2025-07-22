@@ -1,0 +1,60 @@
+# Count of patients in the database
+SELECT COUNT(*) AS total_patients FROM patient;
+
+# Patient gender distribution
+SELECT gender, COUNT(*) AS count
+FROM patient
+GROUP BY gender;
+
+# Count of ServiceRequests per code type
+SELECT code, COUNT(*) AS count
+FROM servicerequest
+GROUP BY code
+ORDER BY count DESC;
+
+# join observations with patients
+SELECT
+  p.fhir_id AS patient_id,
+  o.code,
+  o.display,
+  o.value,
+  o.unit,
+  o.effective_date
+FROM observation o
+JOIN patient p ON o.patient_id = p.fhir_id
+ORDER BY o.effective_date DESC
+LIMIT 10;
+
+#Calculate average value of a certain observation code (e.g., body height, LOINC 8302-2)
+SELECT
+  AVG(o.value) AS avg_height_cm,
+  COUNT(*) AS count_measurements
+FROM observation o
+WHERE o.code = '8302-2';
+
+#serviceRequets per patient
+SELECT
+  p.fhir_id AS patient_id,
+  COUNT(sr.fhir_id) AS service_request_count
+FROM patient p
+LEFT JOIN servicerequest sr ON sr.patient_id = p.fhir_id
+GROUP BY p.fhir_id
+ORDER BY service_request_count DESC
+LIMIT 10;
+
+#Count observations per month
+SELECT
+  DATE_TRUNC('month', effective_date) AS month,
+  COUNT(*) AS observation_count
+FROM observation
+GROUP BY month
+ORDER BY month;
+
+
+
+
+
+
+
+
+

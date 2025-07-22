@@ -1,0 +1,32 @@
+-- ddl_create.sql
+
+CREATE TABLE patient (
+    fhir_id TEXT PRIMARY KEY,
+    identifier TEXT,
+    given TEXT,
+    family TEXT,
+    gender TEXT,
+    birth_date DATE
+);
+
+CREATE TABLE observation (
+    fhir_id TEXT PRIMARY KEY,
+    patient_id TEXT REFERENCES patient(fhir_id),
+    code TEXT,
+    system TEXT,
+    display TEXT,
+    value NUMERIC,
+    unit TEXT,
+    effective_date TIMESTAMP
+);
+
+CREATE TABLE servicerequest (
+    fhir_id TEXT PRIMARY KEY,
+    patient_id TEXT REFERENCES patient(fhir_id),
+    code TEXT,
+    display TEXT,
+    status TEXT,
+    intent TEXT,
+    authored_on TIMESTAMP,
+    requester_ref TEXT
+);

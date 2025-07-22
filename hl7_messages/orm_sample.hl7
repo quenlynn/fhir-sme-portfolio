@@ -1,0 +1,6 @@
+MSH|^~\&|OrderSystem|Clinic|EHR|EHRFacility|202507201030||ORM^O01|12345|P|2.5
+PID|1||789012^^^Hospital^MR||Smith^John||19751231|M|||456 Oak St^^Metropolis^NY^10102||(987)654-3210|||M
+ORC|NW|ORD998877|||
+OBR|1||998877^OrderSystem|8302-2^Body height^LN||202507201030|||||||||456789^Doe^Alice||||||R
+                         
+
